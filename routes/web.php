@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::post('/', 'otentikasi\OtentikasiController@login')->name('login');
 Route::get('/', 'otentikasi\OtentikasiController@index')->name('login');
-Route::post('login', 'otentikasi\OtentikasiController@login')->name('login');
 
 
-Route::group(['middleware' => ['CekLoginMiddleware']], function () {
+// Route::group(['middleware' => ['CekLoginMiddleware']], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', function () {return view('index');});
     Route::get('crud', 'CrudController@index')->name('crud');
     Route::get('crud/tambah', 'CrudController@tambah')->name('crud.tambah');
